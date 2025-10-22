@@ -2,7 +2,8 @@ import datetime, requests
 
 def buscar_editais_pncp():
     ontem = (datetime.date.today() - datetime.timedelta(days=1)).isoformat()
-    url = f"https://pncp.gov.br/api/consulta/v1/contratacoes?data_publicacao_inicio={ontem}"
+    hoje = datetime.date.today().isoformat()
+    url = f"https://pncp.gov.br/api/consulta/v1/contratacoes?data_publicacao_inicio={ontem}&data_publicacao_fim={hoje}&pagina=1&tamanhoPagina=20"
     r = requests.get(url)
     if r.status_code == 200:
         dados = r.json()
